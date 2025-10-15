@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="Theme.LazyPizza.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item> <!-- Optional -->
+        <item name="postSplashScreenTheme">@style/Theme.LazyPizza</item>
+    </style>
+
+</resources>
