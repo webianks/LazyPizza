@@ -16,6 +16,17 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().setKeepOnScreenCondition { false }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // In a debug Activity or KMP setup that has Firebase initialized:
+        /*lifecycleScope.launch {
+            try {
+                seedGenericCatalog()
+                Log.d("Seed", "Seeded!")
+            } catch (e: Exception) {
+                Log.e("Seed", "Failed", e)
+            }
+        }*/
+
         setContent {
             LazyPizzaTheme {
                 val windowSizeClass = calculateWindowSizeClass(this)

@@ -39,6 +39,13 @@ val Title3 = TextStyle(
     lineHeight = 22.sp
 )
 
+val Title4 = TextStyle(
+    fontFamily = InstrumentSansFontFamily,
+    fontWeight = FontWeight.Medium,
+    fontSize = 11.sp,
+    lineHeight = 16.sp
+)
+
 val Label2Semibold = TextStyle(
     fontFamily = InstrumentSansFontFamily,
     fontWeight = FontWeight.SemiBold,
@@ -101,6 +108,7 @@ private val BaseM3Typography = Typography(
     headlineSmall = Title1SemiBold,
     titleLarge = Title2,
     titleMedium = Title3,
+    titleSmall = Title4,
     bodyLarge = Body1Regular,
     bodyMedium = Body3Regular,
     bodySmall = Body4Regular,
@@ -123,6 +131,9 @@ object AppTextStyles {
         @Composable get() = LocalAppTypography.current.m3.titleLarge
     val Title3: TextStyle
         @Composable get() = LocalAppTypography.current.m3.titleMedium
+
+    val Title4: TextStyle
+        @Composable get() = LocalAppTypography.current.m3.titleSmall
 
     val Body1Regular: TextStyle
         @Composable get() = LocalAppTypography.current.m3.bodyLarge

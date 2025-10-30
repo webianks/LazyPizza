@@ -20,17 +20,13 @@ import java.util.Locale
 
 @Composable
 fun AddToCartBottomBar(
-    mainModifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
     buttonModifier: Modifier = Modifier.height(48.dp),
-    price: Double,
-    onAddToCart: () -> Unit
+    text: String,
+    onClick: () -> Unit
 ) {
-    val currencyFormatter = remember {
-        NumberFormat.getCurrencyInstance(Locale.US)
-    }
-
     Box(
-        modifier = mainModifier
+        modifier = modifier
             .fillMaxWidth()
             .background(
                 Brush.verticalGradient(
@@ -45,8 +41,8 @@ fun AddToCartBottomBar(
     ) {
         PrimaryGradientButton(
             modifier = buttonModifier.fillMaxWidth(),
-            text = "Add to Cart for ${currencyFormatter.format(price)}",
-            onClick = onAddToCart
+            text = text,
+            onClick = onClick
         )
     }
 }
@@ -55,9 +51,13 @@ fun AddToCartBottomBar(
 @Composable
 fun AddToCartBottomBarPreview() {
     LazyPizzaTheme {
+        val currencyFormatter = remember {
+            NumberFormat.getCurrencyInstance(Locale.US)
+        }
+
         AddToCartBottomBar(
-            price = 12.99,
-            onAddToCart = {}
+            text = "Add to Cart for ${currencyFormatter.format(12.5f)}",
+            onClick = {}
         )
     }
 }

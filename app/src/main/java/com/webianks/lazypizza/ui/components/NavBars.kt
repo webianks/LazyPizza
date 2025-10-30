@@ -2,6 +2,7 @@ package com.webianks.lazypizza.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,8 @@ import com.webianks.lazypizza.ui.theme.LazyPizzaTheme
 @Composable
 fun TopLevelNavBar(
     modifier: Modifier = Modifier,
+    onHomeScreen: Boolean = true,
+    centerTitle: String = "",
     phoneNumber: String = "+1 (555) 321-7890"
 ) {
     Row(
@@ -39,32 +42,45 @@ fun TopLevelNavBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(id = R.drawable.logo_bold),
-                contentDescription = "App Logo",
-                modifier = Modifier.size(20.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "LazyPizza",
-                style = AppTextStyles.Body3Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(R.drawable.ic_phone),
-                modifier = Modifier.size(14.dp),
-                contentDescription = "Phone",
-                tint = MaterialTheme.colorScheme.secondary
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(
-                text = phoneNumber,
-                style = AppTextStyles.Body1Regular,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+        if (onHomeScreen) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_bold),
+                    contentDescription = "App Logo",
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "LazyPizza",
+                    style = AppTextStyles.Body3Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_phone),
+                    modifier = Modifier.size(14.dp),
+                    contentDescription = "Phone",
+                    tint = MaterialTheme.colorScheme.secondary
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    text = phoneNumber,
+                    style = AppTextStyles.Body1Regular,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        } else {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = centerTitle,
+                    style = AppTextStyles.Body1Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
     }
 }
