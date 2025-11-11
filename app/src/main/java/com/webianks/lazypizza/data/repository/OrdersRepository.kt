@@ -1,8 +1,8 @@
 package com.webianks.lazypizza.data.repository
 
-import com.webianks.lazypizza.data.OrderSummary
+import com.webianks.lazypizza.data.Order
 import kotlinx.coroutines.flow.Flow
 
 interface OrdersRepository {
-    fun history(): Flow<List<OrderSummary>>
+    fun getOrderHistory(): Flow<List<Order>>
 }

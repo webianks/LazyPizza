@@ -14,6 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.webianks.lazypizza.data.MenuItem
+import com.webianks.lazypizza.ui.screens.AuthScreen
+import com.webianks.lazypizza.ui.screens.AuthViewModel
 import com.webianks.lazypizza.ui.screens.CartViewModel
 import com.webianks.lazypizza.ui.screens.DetailsScreen
 import com.webianks.lazypizza.ui.screens.HomeScreen
@@ -24,10 +26,13 @@ import com.webianks.lazypizza.ui.screens.MenuViewModel
 @Composable
 fun AppNavigation(windowSizeClass: WindowSizeClass) {
     val navController = rememberNavController()
-    val factory = GenericCoreModule.factory(LocalContext.current.applicationContext)
+    val context = LocalContext.current.applicationContext
+    val factory = GenericCoreModule.factory(context)
     val cartViewModel: CartViewModel = viewModel(factory = factory)
     val menuViewModel: MenuViewModel = viewModel(factory = factory)
     val itemDetailsViewModel: ItemDetailsViewModel = viewModel(factory = factory)
+    val authViewModel: AuthViewModel =
+        viewModel(factory = GenericCoreModule.AuthViewModelFactory(context))
     val menuScreenState = rememberLazyStaggeredGridState()
 
     NavHost(
@@ -46,6 +51,7 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
                 mainNavController = navController,
                 cartViewModel = cartViewModel,
                 menuViewModel = menuViewModel,
+                authViewModel = authViewModel,
                 gridState = menuScreenState,
                 navigateToCart = backStackEntry.arguments?.getBoolean("navigateToCart") ?: false
             )
@@ -63,6 +69,13 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
                     itemDetailsViewModel = itemDetailsViewModel
                 )
             }
+        }
+        composable("auth") {
+            AuthScreen(
+                navController = navController,
+                viewModel = authViewModel,
+                windowSizeClass = windowSizeClass
+            )
         }
     }
 }

@@ -53,6 +53,13 @@ val Label2Semibold = TextStyle(
     lineHeight = 16.sp
 )
 
+val Label3Medium = TextStyle(
+    fontFamily = InstrumentSansFontFamily,
+    fontWeight = FontWeight.Medium,
+    fontSize = 10.sp,
+    lineHeight = 16.sp
+)
+
 val Body1Regular = TextStyle(
     fontFamily = InstrumentSansFontFamily,
     fontWeight = FontWeight.Normal,
@@ -101,7 +108,8 @@ data class AppTypography(
     // Variants that don’t fit in M3 slots:
     val bodyLargeMedium: TextStyle,
     val bodyMediumMedium: TextStyle,
-    val bodyMediumBold: TextStyle
+    val bodyMediumBold: TextStyle,
+    val labelMediumSmall: TextStyle
 )
 
 private val BaseM3Typography = Typography(
@@ -119,7 +127,8 @@ val AppTypographyDefaults = AppTypography(
     m3 = BaseM3Typography,
     bodyLargeMedium = Body1Medium,      // 16sp, Medium
     bodyMediumMedium = Body3Medium,     // 14sp, Medium
-    bodyMediumBold = Body3Bold          // 14sp, Bold
+    bodyMediumBold = Body3Bold,         // 14sp, Bold
+    labelMediumSmall = Label3Medium     // 10sp, Medium
 )
 
 val LocalAppTypography = staticCompositionLocalOf { AppTypographyDefaults }
@@ -131,20 +140,18 @@ object AppTextStyles {
         @Composable get() = LocalAppTypography.current.m3.titleLarge
     val Title3: TextStyle
         @Composable get() = LocalAppTypography.current.m3.titleMedium
-
     val Title4: TextStyle
         @Composable get() = LocalAppTypography.current.m3.titleSmall
-
     val Body1Regular: TextStyle
         @Composable get() = LocalAppTypography.current.m3.bodyLarge
     val Body3Regular: TextStyle
         @Composable get() = LocalAppTypography.current.m3.bodyMedium
     val Body4Regular: TextStyle
         @Composable get() = LocalAppTypography.current.m3.bodySmall
-
     val Label2Semibold: TextStyle
         @Composable get() = LocalAppTypography.current.m3.labelSmall
-
+    val Label3Medium: TextStyle
+        @Composable get() = LocalAppTypography.current.labelMediumSmall
     val Body1Medium: TextStyle
         @Composable get() = LocalAppTypography.current.bodyLargeMedium
     val Body3Medium: TextStyle

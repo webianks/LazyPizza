@@ -40,7 +40,7 @@ fun AddToCartBottomBar(
         contentAlignment = Alignment.BottomCenter
     ) {
         PrimaryGradientButton(
-            modifier = buttonModifier.fillMaxWidth(),
+            buttonModifier = Modifier.fillMaxWidth(),
             text = text,
             onClick = onClick
         )

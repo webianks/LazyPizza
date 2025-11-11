@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.storage)
     implementation(libs.google.firebase.firestore)
+    implementation(libs.google.firebase.auth)
     
     // Datastore
     implementation(libs.androidx.datastore)

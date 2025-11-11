@@ -1,6 +1,8 @@
 package com.webianks.lazypizza.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -21,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +36,9 @@ fun TopLevelNavBar(
     modifier: Modifier = Modifier,
     onHomeScreen: Boolean = true,
     centerTitle: String = "",
-    phoneNumber: String = "+1 (555) 321-7890"
+    phoneNumber: String = "+1 (555) 321-7890",
+    loggedIn: Boolean = false,
+    onAccountClick: () -> Unit = { }
 ) {
     Row(
         modifier = modifier
@@ -69,6 +74,31 @@ fun TopLevelNavBar(
                     style = AppTextStyles.Body1Regular,
                     color = MaterialTheme.colorScheme.onSurface
                 )
+
+                Spacer(modifier = Modifier.width(16.dp))
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .background(
+                            if (loggedIn) MaterialTheme.colorScheme.primaryContainer else
+                                MaterialTheme.colorScheme.secondaryContainer
+                        )
+                        .clickable(enabled = true, onClick = onAccountClick)
+                ) {
+                    Icon(
+                        painter = painterResource(
+                            if (loggedIn) R.drawable.ic_logout else
+                                R.drawable.ic_user
+                        ),
+                        modifier = Modifier
+                            .size(16.dp)
+                            .align(Alignment.Center),
+                        contentDescription = "Logout",
+                        tint = if (loggedIn) MaterialTheme.colorScheme.primary else
+                            MaterialTheme.colorScheme.secondary
+                    )
+                }
             }
         } else {
             Box(

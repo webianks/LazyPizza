@@ -44,8 +44,8 @@ import coil.request.ImageRequest
 import com.webianks.lazypizza.R
 import com.webianks.lazypizza.data.MenuItem
 import com.webianks.lazypizza.data.Money
-import com.webianks.lazypizza.ui.screens.sampleTopping
-import com.webianks.lazypizza.ui.screens.simpleItem
+import com.webianks.lazypizza.data.sampleTopping
+import com.webianks.lazypizza.data.simpleItem
 import com.webianks.lazypizza.ui.theme.AppTextStyles
 import com.webianks.lazypizza.ui.theme.LazyPizzaTheme
 

@@ -149,7 +149,7 @@ fun LargeScreenLayout(
             )
             Box(modifier = Modifier.padding(16.dp)) {
                 PrimaryGradientButton(
-                    modifier = Modifier
+                    buttonModifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
                     text = "Proceed to Checkout (${totalPrice.format()})",
@@ -329,7 +329,8 @@ fun EmptyCartState(
         Spacer(modifier = Modifier.height(32.dp))
         PrimaryGradientButton(
             text = "Back to Menu",
-            onClick = onNavigateToMenu
+            onClick = onNavigateToMenu,
+            buttonModifier = Modifier.height(40.dp)
         )
     }
 }

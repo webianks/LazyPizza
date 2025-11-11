@@ -1,9 +1,4 @@
-package com.webianks.lazypizza.ui.screens
-
-import com.webianks.lazypizza.data.MenuItem
-import com.webianks.lazypizza.data.ModifierGroup
-import com.webianks.lazypizza.data.ModifierOption
-import com.webianks.lazypizza.data.Money
+package com.webianks.lazypizza.data
 
 /*
 data class MenuItem(
@@ -139,7 +134,6 @@ val simpleItem = MenuItem.Simple(
     imageUrl = "https://example.com/sample_image.png",
     category = "Sauces"
 )
-
 
 /*val sampleMenu = mutableListOf(
     // Pizzas
