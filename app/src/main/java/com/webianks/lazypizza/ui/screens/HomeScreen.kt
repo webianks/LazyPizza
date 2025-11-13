@@ -13,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -21,6 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.webianks.lazypizza.ui.components.CenteredBottomBar
+import com.webianks.lazypizza.ui.components.LogoutDialog
 import com.webianks.lazypizza.ui.components.NavigationRail
 import com.webianks.lazypizza.ui.components.TopLevelNavBar
 
@@ -31,6 +35,7 @@ fun HomeScreen(
     mainNavController: NavController,
     cartViewModel: CartViewModel,
     menuViewModel: MenuViewModel,
+    authViewModel: AuthViewModel,
     gridState: LazyStaggeredGridState,
     navigateToCart: Boolean
 ) {
@@ -38,6 +43,8 @@ fun HomeScreen(
     val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val cartLines by cartViewModel.lines.collectAsState()
+    val authState by authViewModel.authState.collectAsState()
+    var showLogoutDialog by remember { mutableStateOf(false) }
 
     if (navigateToCart) {
         LaunchedEffect(Unit) {
@@ -45,6 +52,24 @@ fun HomeScreen(
                 launchSingleTop = true
                 restoreState = true
             }
+        }
+    }
+
+    if (showLogoutDialog) {
+        LogoutDialog(
+            onConfirmLogout = {
+                authViewModel.logout()
+                showLogoutDialog = false
+            },
+            onDismiss = { showLogoutDialog = false }
+        )
+    }
+
+    fun handleAccountClick() {
+        if (authState !is AuthState.SignedIn) {
+            mainNavController.navigate("auth")
+        } else {
+            showLogoutDialog = true
         }
     }
 
@@ -82,6 +107,8 @@ fun HomeScreen(
                         Destination.HISTORY.route -> "Order History"
                         else -> ""
                     },
+                    onAccountClick = ::handleAccountClick,
+                    loggedIn = authState is AuthState.SignedIn
                 )
             },
             bottomBar = {
@@ -128,7 +155,13 @@ fun HomeScreen(
                         onNavigateToMenu = { bottomNavController.navigate(Destination.MENU.route) }
                     )
                 }
-                composable(Destination.HISTORY.route) { HistoryScreen() }
+                composable(Destination.HISTORY.route) { 
+                    HistoryScreen(
+                        windowSizeClass = windowSizeClass,
+                        isUserLoggedIn = authState is AuthState.SignedIn,
+                        onSignInClicked = { mainNavController.navigate("auth") } 
+                    )
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package com.webianks.lazypizza.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val TextPrimary = Color(0xFF03131F)
+val TextPrimary8 = Color(0x1403131F)
 val TextSecondary = Color(0xFF627686)
 val TextSecondary8 = Color(0x14627686) // 8% alpha for #627686
 val TextOnPrimary = Color(0xFFFFFFFF)
@@ -17,3 +18,5 @@ val PrimaryGradientEnd = Color(0xFFF36B50)
 val Primary = Color(0xFFF36B50)
 val Primary8 = Color(0x14F36B50) // 8% alpha for #F36B50
 val ShadowColor = Color(0xFF03131F)
+val Warning = Color(0xFFF9A825)
+val Success = Color(0xFF2E7D32)
